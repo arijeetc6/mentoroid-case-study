@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoroid — Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-400: #60a5fa;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-900: #1e3a8a;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+    --shadow-md: 0 4px 16px rgba(15,23,42,0.08), 0 2px 6px rgba(15,23,42,0.04);
+    --shadow-lg: 0 12px 40px rgba(15,23,42,0.10), 0 4px 12px rgba(15,23,42,0.05);
+    --shadow-blue: 0 4px 20px rgba(59,130,246,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--slate-50);
+    color: var(--slate-800);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 40%, #f5f8ff 100%);
+    border-bottom: 1px solid var(--blue-100);
+    padding: 80px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -160px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    background: var(--blue-50);
+    border: 1px solid var(--blue-200);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .badge::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-500);
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 7vw, 76px);
+    font-weight: 400;
+    color: var(--slate-900);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .hero-title span {
+    color: var(--blue-600);
+  }
+
+  .hero-subtitle {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--slate-700);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--slate-500);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 0;
+    width: fit-content;
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 36px;
+  }
+  .meta-item {
+    padding: 16px 24px;
+    border-right: 1px solid var(--slate-200);
+  }
+  .meta-item:last-child { border-right: none; }
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--slate-800);
+  }
+  .meta-value.status {
+    color: #059669;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .meta-value.status::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    flex-shrink: 0;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--slate-600);
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    padding: 5px 12px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+  .tag:hover {
+    border-color: var(--blue-300);
+    color: var(--blue-600);
+    background: var(--blue-50);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-500);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 32px;
+    background: var(--blue-300);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 400;
+    color: var(--slate-900);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    line-height: 1.15;
+  }
+
+  .section-lead {
+    font-size: 16px;
+    color: var(--slate-600);
+    max-width: 640px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+
+  /* ── OVERVIEW CALLOUT ── */
+  .callout {
+    background: linear-gradient(135deg, var(--blue-50), #f0f7ff);
+    border: 1px solid var(--blue-100);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .callout p {
+    font-size: 17px;
+    color: var(--slate-700);
+    line-height: 1.7;
+  }
+  .callout strong {
+    color: var(--slate-900);
+    font-weight: 600;
+  }
+
+  /* ── CHALLENGE CARDS ── */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--slate-200);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .challenge-item {
+    background: var(--white);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    align-items: start;
+    transition: background 0.15s ease;
+  }
+  .challenge-item:hover { background: var(--blue-50); }
+  .challenge-num {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: var(--shadow-blue);
+  }
+  .challenge-body h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--slate-900);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .challenge-body p {
+    font-size: 14px;
+    color: var(--slate-500);
+    line-height: 1.65;
+  }
+
+  /* ── WHY FLUTTER GRID ── */
+  .flutter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .flutter-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 24px 26px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  .flutter-card:hover {
+    border-color: var(--blue-200);
+    box-shadow: var(--shadow-blue);
+    transform: translateY(-2px);
+  }
+  .flutter-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .flutter-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .flutter-card p {
+    font-size: 13px;
+    color: var(--slate-500);
+    line-height: 1.6;
+  }
+
+  .quote-block {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+    border-radius: 16px;
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-blue);
+  }
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 24px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 140px;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-block p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ARCHITECTURE ── */
+  .arch-diagram {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 32px;
+  }
+  .arch-layer {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--slate-100);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .arch-layer:last-child { border-bottom: none; }
+  .arch-layer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    width: 110px;
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .layer-presentation .arch-layer-label { background: #ede9fe; color: #7c3aed; }
+  .layer-core .arch-layer-label { background: var(--blue-50); color: var(--blue-700); }
+  .layer-data .arch-layer-label { background: #ecfdf5; color: #059669; }
+  .layer-domain .arch-layer-label { background: #fff7ed; color: #ea580c; }
+  .arch-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .arch-pill {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--slate-600);
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+
+  .provider-tree {
+    background: var(--slate-900);
+    border-radius: 14px;
+    padding: 28px 32px;
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+  }
+  .provider-tree pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #94a3b8;
+    white-space: pre;
+  }
+  .provider-tree .t-root { color: #60a5fa; font-weight: 500; }
+  .provider-tree .t-child { color: #a78bfa; }
+  .provider-tree .t-leaf { color: #34d399; }
+  .provider-tree .t-comment { color: #475569; }
+  .provider-tree .t-branch { color: #64748b; }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 24px 26px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  .feature-card:hover {
+    border-color: var(--blue-200);
+    box-shadow: var(--shadow-blue);
+    transform: translateY(-2px);
+  }
+  .feature-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .feature-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .feature-card p {
+    font-size: 13px;
+    color: var(--slate-500);
+    line-height: 1.6;
+  }
+
+  /* ── ENGINEERING DEEP DIVES ── */
+  .deepdive {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .deepdive-challenge {
+    background: linear-gradient(90deg, #fff5f5, #fef2f2);
+    border-bottom: 1px solid #fecaca;
+    padding: 20px 28px;
+  }
+  .deepdive-challenge .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 6px;
+  }
+  .deepdive-challenge h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #991b1b;
+    letter-spacing: -0.01em;
+  }
+  .deepdive-challenge p {
+    font-size: 13.5px;
+    color: #b91c1c;
+    margin-top: 6px;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+  .deepdive-solution {
+    background: linear-gradient(90deg, var(--blue-50), #f0f7ff);
+    padding: 20px 28px;
+  }
+  .deepdive-solution .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    margin-bottom: 6px;
+  }
+  .deepdive-solution h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue-900);
+    letter-spacing: -0.01em;
+  }
+  .deepdive-solution p {
+    font-size: 13.5px;
+    color: var(--blue-700);
+    margin-top: 6px;
+    line-height: 1.65;
+    opacity: 0.9;
+  }
+  .deepdive-solution code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid var(--blue-200);
+    color: var(--blue-700);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* ── TECH STACK TABLE ── */
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    font-size: 14px;
+  }
+  .stack-table thead tr {
+    background: linear-gradient(90deg, var(--blue-50), #f0f7ff);
+    border-bottom: 1px solid var(--blue-100);
+  }
+  .stack-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    font-weight: 500;
+    padding: 14px 20px;
+    text-align: left;
+  }
+  .stack-table tbody tr {
+    border-bottom: 1px solid var(--slate-100);
+    transition: background 0.12s ease;
+  }
+  .stack-table tbody tr:last-child { border-bottom: none; }
+  .stack-table tbody tr:hover { background: var(--slate-50); }
+  .stack-table td {
+    padding: 14px 20px;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .stack-table td:first-child {
+    font-weight: 500;
+    color: var(--slate-700);
+    font-size: 12px;
+    white-space: nowrap;
+    width: 140px;
+  }
+  .stack-table td:nth-child(2) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--blue-700);
+    width: 200px;
+  }
+  .stack-table td:nth-child(3) {
+    font-size: 13px;
+    color: var(--slate-500);
+  }
+
+  /* ── OUTCOMES ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+  }
+  .stat-card:hover {
+    border-color: var(--blue-200);
+    box-shadow: var(--shadow-blue);
+    transform: translateY(-2px);
+  }
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--blue-600);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    line-height: 1.4;
+  }
+
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .outcome-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: start;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s ease;
+  }
+  .outcome-card:hover { border-color: var(--blue-200); }
+  .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    box-shadow: 0 2px 8px rgba(16,185,129,0.25);
+  }
+  .check::after {
+    content: '✓';
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+  }
+  .outcome-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .outcome-card p {
+    font-size: 13px;
+    color: var(--slate-500);
+    line-height: 1.6;
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  .achievements {
+    background: linear-gradient(135deg, var(--slate-900), #162040);
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .achievements::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .achievements h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--white);
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    position: relative;
+  }
+  .achievement-item {
+    display: flex;
+    gap: 12px;
+    align-items: start;
+  }
+  .ach-bullet {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-400);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+  .achievement-item p {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--slate-900);
+    padding: 48px 0;
+    text-align: center;
+  }
+  footer .footer-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  footer .footer-sub {
+    font-size: 13px;
+    color: var(--slate-500);
+    margin-bottom: 6px;
+  }
+  footer .footer-stack {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--blue-400);
+    margin-bottom: 4px;
+  }
+  footer .footer-date {
+    font-size: 12px;
+    color: var(--slate-600);
+  }
+
+  @media (max-width: 640px) {
+    .meta-grid { grid-template-columns: repeat(2, 1fr); }
+    .flutter-grid, .features-grid, .outcome-grid, .achievements-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 0 20px; }
+    section { padding: 52px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="badge">Case Study</div>
+    <h1 class="hero-title"><span>Mentoroid</span></h1>
+    <p class="hero-subtitle">AI-Powered Desktop Coaching &amp; Performance Dashboard for Dota 2</p>
+    <p class="hero-desc">A Flutter Desktop application that transforms complex gameplay telemetry into real-time coaching insights, analytics dashboards, and personalized performance guidance.</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Domain</div>
+        <div class="meta-value">Gaming / Esports Tech</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">Desktop — macOS, Windows, Linux</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value status">Active Development</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Client</div>
+        <div class="meta-value">Mentoroid</div>
+      </div>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">Flutter Desktop</span>
+      <span class="tag">Dart</span>
+      <span class="tag">Firebase</span>
+      <span class="tag">Cloud Run</span>
+      <span class="tag">Hive DB</span>
+      <span class="tag">Provider</span>
+      <span class="tag">Dota 2 GSI</span>
+      <span class="tag">LLM API</span>
+      <span class="tag">AES-256 Encryption</span>
+      <span class="tag">PostHog</span>
+      <span class="tag">Sentry</span>
+    </div>
+  </div>
+</header>
+
+<!-- OVERVIEW -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Overview</div>
+    <h2 class="section-title">What is Mentoroid?</h2>
+
+    <div class="callout">
+      <p>Mentoroid is a <strong>desktop-first coaching and analytics platform</strong> designed to help competitive Dota 2 players improve their gameplay through data-driven insights, real-time guidance, and long-term performance tracking. It runs alongside live gameplay, delivering actionable information without interrupting the game experience.</p>
+    </div>
+
+    <p class="section-lead">The platform visualizes a player's historical and live match data across multiple dimensions — roles, heroes, game phases, and performance metrics — transforming complex gameplay telemetry into clear, actionable coaching signals. The goal is not just to show statistics, but to tell players <strong>what to focus on next</strong> and why.</p>
+
+    <p style="font-size:15px; color:var(--slate-500); line-height:1.75;">By combining a responsive desktop UI with local-first data handling and an embedded backend, Mentoroid is built to remain stable across long gaming sessions while supporting real-time updates, voice coaching, and post-game analysis flows.</p>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The Challenge</div>
+    <h2 class="section-title">Why is this a hard problem?</h2>
+
+    <div class="challenge-list">
+      <div class="challenge-item">
+        <div class="challenge-num">01</div>
+        <div class="challenge-body">
+          <h3>Real-Time Data in a Desktop-First Context</h3>
+          <p>Unlike web dashboards, Mentoroid must coexist with a full-screen game. The UI must remain responsive even when backgrounded, react to match events in real time, and avoid consuming resources that would degrade gaming performance.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">02</div>
+        <div class="challenge-body">
+          <h3>Cross-Platform Desktop Complexity</h3>
+          <p>Targeting macOS, Windows, and Linux simultaneously means platform-specific native code, different Steam installation paths, registry queries on Windows, sandboxed environments on macOS, and separate binary compilation targets for the embedded backend.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">03</div>
+        <div class="challenge-body">
+          <h3>Embedded Backend Orchestration</h3>
+          <p>The AI coaching pipeline requires a companion backend binary to run locally. This binary must be securely distributed, encrypted at rest, decrypted and executed at runtime, and continuously monitored — all within the Flutter app lifecycle.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">04</div>
+        <div class="challenge-body">
+          <h3>Data Density Without UX Complexity</h3>
+          <p>Dota 2 produces enormous volumes of per-game telemetry. Surfacing meaningful insights — hero performance, role mastery, laning phase vs late game analysis — without overwhelming the player requires careful information hierarchy and visualization design.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">05</div>
+        <div class="challenge-body">
+          <h3>GSI Integration Across Environments</h3>
+          <p>Game State Integration (GSI) requires writing a configuration file into Dota 2's install directory — which lives in wildly different locations depending on OS, Steam library configuration, and whether macOS sandboxing is active.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FLUTTER -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Technology Decision</div>
+    <h2 class="section-title">Why Flutter Desktop?</h2>
+    <p class="section-lead">Mentoroid is not a typical analytics dashboard — it is a game-adjacent, real-time desktop application that must coexist with a full-screen game. The framework decision was consequential and non-obvious.</p>
+
+    <div class="flutter-grid">
+      <div class="flutter-card">
+        <div class="flutter-icon">⚡</div>
+        <h3>GPU-Accelerated Rendering</h3>
+        <p>Flutter's Skia/Impeller renderer delivers smooth, consistent frame rates even for graph-heavy dashboards, without relying on a browser engine or heavyweight web stack.</p>
+      </div>
+      <div class="flutter-card">
+        <div class="flutter-icon">🎯</div>
+        <h3>Single Codebase, Three Platforms</h3>
+        <p>macOS, Windows, and Linux are all served from the same Dart codebase. Platform-specific logic is isolated to native channels, keeping the product surface consistent.</p>
+      </div>
+      <div class="flutter-card">
+        <div class="flutter-icon">📐</div>
+        <h3>Pixel-Perfect Dashboard Layouts</h3>
+        <p>flutter_screenutil enables a reference-based layout system (1440×900) that scales cleanly across display sizes and DPI settings — critical for data-dense game companion UIs.</p>
+      </div>
+      <div class="flutter-card">
+        <div class="flutter-icon">🔁</div>
+        <h3>Future-Proof Architecture</h3>
+        <p>The same UI architecture, components, and state management patterns can be reused if Mentoroid expands to mobile or web surfaces in the future, reducing rework cost.</p>
+      </div>
+      <div class="flutter-card">
+        <div class="flutter-icon">🧩</div>
+        <h3>Rich Ecosystem</h3>
+        <p>Mature packages for charting (fl_chart), routing (go_router), local storage (Hive), and window management gave the team building blocks without reinventing infrastructure.</p>
+      </div>
+      <div class="flutter-card">
+        <div class="flutter-icon">🕐</div>
+        <h3>Predictable Long-Session Behavior</h3>
+        <p>Flutter's Dart VM is suited for long-running desktop processes, making it reliable during 2–3 hour gaming sessions without GC-induced latency spikes.</p>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>Flutter Desktop allowed us to build a high-performance, data-dense UI that behaves like a native desktop app — without splitting into three separate codebases or compromising on visual quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Technical Approach</div>
+    <h2 class="section-title">Architecture &amp; Design</h2>
+    <p class="section-lead">Mentoroid follows a <strong>layered architecture</strong> — the codebase is organized by layer first, with all features sharing each layer. State management is handled through Provider with ChangeNotifier, organized into a dependency-chained hierarchy.</p>
+
+    <div class="arch-diagram">
+      <div class="arch-layer layer-presentation">
+        <span class="arch-layer-label">Presentation</span>
+        <div class="arch-pills">
+          <span class="arch-pill">screens/</span>
+          <span class="arch-pill">providers/</span>
+          <span class="arch-pill">widgets/</span>
+        </div>
+      </div>
+      <div class="arch-layer layer-core">
+        <span class="arch-layer-label">Core</span>
+        <div class="arch-pills">
+          <span class="arch-pill">services/</span>
+          <span class="arch-pill">network/ (Dio)</span>
+          <span class="arch-pill">config/</span>
+          <span class="arch-pill">analytics/</span>
+          <span class="arch-pill">storage/</span>
+        </div>
+      </div>
+      <div class="arch-layer layer-data">
+        <span class="arch-layer-label">Data</span>
+        <div class="arch-pills">
+          <span class="arch-pill">repositories/</span>
+          <span class="arch-pill">remote datasources/</span>
+          <span class="arch-pill">local datasources/</span>
+          <span class="arch-pill">models/</span>
+        </div>
+      </div>
+      <div class="arch-layer layer-domain">
+        <span class="arch-layer-label">Domain</span>
+        <div class="arch-pills">
+          <span class="arch-pill">entities/</span>
+          <span class="arch-pill">business logic/</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--slate-600); line-height:1.7; margin-bottom:28px; background:var(--slate-100); border:1px solid var(--slate-200); border-left:3px solid var(--blue-400); border-radius:0 10px 10px 0; padding:16px 20px;">
+      <strong style="color:var(--slate-800);">Note on structure:</strong> Unlike feature-first Clean Architecture where each feature owns its own data/domain/presentation subtree, Mentoroid groups all features together within each layer — e.g. all providers live in <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--white);border:1px solid var(--slate-200);padding:1px 6px;border-radius:4px;">presentation/providers/</code> and all screens under <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--white);border:1px solid var(--slate-200);padding:1px 6px;border-radius:4px;">presentation/screens/</code>. The layered separation is maintained; feature-level isolation is not.
+    </p>
+
+    <p style="font-size:13px; font-weight:600; color:var(--slate-700); margin-bottom:16px; letter-spacing:-0.01em;">Provider Dependency Tree — providers are chained so that downstream providers automatically receive updated data when upstream state changes:</p>
+
+    <div class="provider-tree">
+      <pre><span class="t-root">AuthProvider</span> <span class="t-comment">(root — Steam ID, session, tokens)</span>
+├── <span class="t-child">PerformanceProvider</span> <span class="t-comment">(hero stats, win rates, trends)</span>
+│   └── <span class="t-leaf">GoalSettingProvider</span> <span class="t-comment">(AI goals, coaching, LLM)</span>
+├── <span class="t-child">GameAnalysisProvider</span> <span class="t-comment">(match history, sessions)</span>
+│   └── <span class="t-leaf">GoalSettingProvider</span> <span class="t-comment">(shared via ProxyProvider)</span>
+├── <span class="t-child">ProfileProvider</span> <span class="t-comment">(user profile, avatar)</span>
+├── <span class="t-child">GsiSetupProvider</span> <span class="t-comment">(installation detection)</span>
+└── <span class="t-child">PGADetailProvider</span> <span class="t-comment">(post-game analysis details)</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Product</div>
+    <h2 class="section-title">Features &amp; Screens</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Performance Dashboard</h3>
+        <p>Central hub showing overall performance score, win/loss breakdown, KDA, Radiant vs Dire win rates, and a trend analysis time-series chart with hover tooltips.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>AI Performance Summary</h3>
+        <p>LLM-generated coaching narrative summarizing a player's strengths, weaknesses, and focus areas — updated after each session and served via Cloud Run.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Post-Game Analysis (PGA)</h3>
+        <p>Match-by-match breakdown covering death logs, farming velocity, vision stats, phased game analysis, and performance-over-time charts for each session.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Goal Setting &amp; Coaching</h3>
+        <p>AI-suggested goals using the PASOLL framework (Player Analysis, Strategy, Objectives, Laning, Lategame), with custom goal creation and tracking.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🦸</div>
+        <h3>Hero &amp; Role Analysis</h3>
+        <p>Most-played hero grids with per-hero stats, role distribution breakdown, strength and weakness area identification across all recent matches.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔊</div>
+        <h3>Voice Coaching</h3>
+        <p>In-game TTS coaching triggered via GSI events. Configurable volume, enable/disable toggle, and per-session coaching delivery controlled from settings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3>GSI Setup Wizard</h3>
+        <p>Guided Dota 2 installation detection across macOS, Windows, and Linux. Parses Steam's libraryfolders.vdf and writes the GSI config file automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>Diagnostics Screen</h3>
+        <p>Live health panel showing GSI config status, backend binary integrity, network reachability, session data presence, and a step-by-step troubleshooting guide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING DEEP DIVES -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Engineering Deep Dives</div>
+    <h2 class="section-title">Challenges &amp; Solutions</h2>
+
+    <div class="deepdive">
+      <div class="deepdive-challenge">
+        <div class="label">Challenge — Embedded Backend Lifecycle</div>
+        <h3>Managing a local backend binary within a Flutter Desktop app is non-trivial.</h3>
+        <p>The AI coaching pipeline requires a companion backend binary to run locally alongside the Flutter app. Distributing, securing, and managing this binary's lifecycle is complex.</p>
+      </div>
+      <div class="deepdive-solution">
+        <div class="label">Solution — Encrypted Binary Distribution</div>
+        <h3>AES-256-CBC encryption with runtime decryption and subprocess management.</h3>
+        <p>The backend binary is compiled for each target platform and encrypted using AES-256-CBC with a 32-byte environment key. The encrypted binary (<code>backend.enc</code>) is bundled in assets, decrypted at runtime to the application support directory, and launched as a subprocess. A webhook server on port 18100 relays match lifecycle events back to the Flutter layer. File integrity is validated by checking for the binary and its <code>_internal/</code> dependency folder before each launch.</p>
+      </div>
+    </div>
+
+    <div class="deepdive">
+      <div class="deepdive-challenge">
+        <div class="label">Challenge — Cross-Platform GSI Configuration</div>
+        <h3>Dota 2's GSI config must be placed in a Steam library path that varies wildly by OS.</h3>
+        <p>Steam can be installed in dozens of locations depending on the OS, user, and whether multiple libraries are configured.</p>
+      </div>
+      <div class="deepdive-solution">
+        <div class="label">Solution — Multi-Path Detection with VDF Parsing</div>
+        <h3>OS-specific detection strategies with Steam library VDF file parsing.</h3>
+        <p>The GSI service implements OS-specific detection: on Windows it queries the registry and falls back to default paths; on macOS it checks both the sandboxed home and real user home (<code>/Users/$USER</code>); on Linux it checks <code>.steam/steam</code>, <code>.local/share/Steam</code>, and <code>.steam/debian-installation</code>. All strategies parse Steam's <code>libraryfolders.vdf</code> file to discover non-default library locations before writing the config file.</p>
+      </div>
+    </div>
+
+    <div class="deepdive">
+      <div class="deepdive-challenge">
+        <div class="label">Challenge — Real-Time Game Monitoring Without Drain</div>
+        <h3>The app must detect Dota 2 start/stop without a tight polling loop that hurts in-game performance.</h3>
+      </div>
+      <div class="deepdive-solution">
+        <div class="label">Solution — Adaptive Polling with Process Detection</div>
+        <h3>Dynamic interval switching with platform-native process detection commands.</h3>
+        <p>The GameMonitor service uses an adaptive timer strategy: 3-second polling intervals when the game is not running, switching to 10-second intervals once the game process is detected. Platform-specific commands (<code>pgrep -f dota</code> on macOS/Linux, <code>tasklist</code> on Windows) are used for detection. All timers are cancelled cleanly on app exit to prevent resource leaks.</p>
+      </div>
+    </div>
+
+    <div class="deepdive">
+      <div class="deepdive-challenge">
+        <div class="label">Challenge — Voice Coaching GSI Sync</div>
+        <h3>Early in development, TTS coaching was silent despite being configured.</h3>
+        <p>The GSI config file was not being written, and the player profile was not being registered with the backend before match start — causing a race condition.</p>
+      </div>
+      <div class="deepdive-solution">
+        <div class="label">Solution — Startup Orchestration with _ensureGsiConfigured()</div>
+        <h3>A dedicated startup orchestration method that resolves the race condition on app launch.</h3>
+        <p>A startup orchestration method runs on app launch ensuring (a) the GSI config file exists and is valid, and (b) <code>set_player</code> is called against the backend before any match begins. This eliminated the race condition between app startup and game launch that was causing silent coaching sessions.</p>
+      </div>
+    </div>
+
+    <div class="deepdive">
+      <div class="deepdive-challenge">
+        <div class="label">Challenge — Data-Dense UI Without Visual Overload</div>
+        <h3>Dota 2 generates rich telemetry per match. Presenting all of it simultaneously risks overwhelming players.</h3>
+      </div>
+      <div class="deepdive-solution">
+        <div class="label">Solution — Layered Information Architecture</div>
+        <h3>Progressive disclosure through a layered reveal strategy across UI contexts.</h3>
+        <p>The UI uses a layered reveal strategy: the main dashboard shows an aggregated score and top-line metrics; role and hero breakdowns are surfaced in modals on demand; post-game analysis is a separate screen flow. Interactive fl_chart visualizations with hover tooltips give depth to players who want it, without cluttering the primary view for those who don't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Stack</div>
+    <h2 class="section-title">Technology Stack</h2>
+
+    <table class="stack-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Technology</th>
+          <th>Role in Mentoroid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>UI Framework</td><td>Flutter Desktop (Dart)</td><td>Cross-platform desktop UI, GPU-accelerated rendering for macOS / Windows / Linux</td></tr>
+        <tr><td>State Management</td><td>Provider + ChangeNotifier</td><td>Reactive state with chained ProxyProviders for dependency injection</td></tr>
+        <tr><td>Routing</td><td>go_router</td><td>Type-safe navigation with StatefulShellRoute for tab persistence</td></tr>
+        <tr><td>Local Storage</td><td>Hive (NoSQL)</td><td>GSI config, auth sessions, EULA tracking, API response caching</td></tr>
+        <tr><td>Cloud Database</td><td>Cloud Firestore</td><td>User profiles, match data, goal storage with real-time streams</td></tr>
+        <tr><td>Auth</td><td>Firebase Auth + Steam</td><td>Identity management with Steam-linked accounts</td></tr>
+        <tr><td>HTTP Client</td><td>Dio</td><td>Multiple API clients for Cloud Functions, Cloud Run, GCS</td></tr>
+        <tr><td>AI / LLM</td><td>LLM API (Cloud Run)</td><td>Session summaries, coaching text, PASOLL framework analysis</td></tr>
+        <tr><td>Charts</td><td>fl_chart</td><td>LineChart, custom trend charts, performance over time visualizations</td></tr>
+        <tr><td>Security</td><td>AES-256-CBC + PointyCastle</td><td>Backend binary encryption at rest, decrypted at runtime</td></tr>
+        <tr><td>Secure Storage</td><td>flutter_secure_storage</td><td>Firebase tokens, API keys stored in OS keychain</td></tr>
+        <tr><td>Analytics</td><td>PostHog + Firebase Analytics</td><td>Screen tracking, session telemetry, bounce rate, custom events</td></tr>
+        <tr><td>Error Tracking</td><td>Sentry</td><td>Crash reporting, error logging with custom context and debug symbols</td></tr>
+        <tr><td>Animations</td><td>Lottie</td><td>Loading states, onboarding animations</td></tr>
+        <tr><td>Desktop Integration</td><td>window_manager</td><td>Fixed 800×572 window size, window lifecycle management</td></tr>
+        <tr><td>Build / Packaging</td><td>CMake + Inno Setup</td><td>Cross-platform build system, Windows installer generation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Outcomes</div>
+    <h2 class="section-title">Results &amp; Current State</h2>
+    <p class="section-lead">Mentoroid is currently under active development and not yet in public production. At this stage, the following qualitative outcomes have been validated:</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Desktop Platforms Supported</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Major Feature Screens</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Shared Dart Codebase</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="font-size:26px;">AES<br>256</div>
+        <div class="stat-label">Binary Encryption</div>
+      </div>
+    </div>
+
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="check"></div>
+        <div>
+          <h3>Stable Desktop UI Behavior</h3>
+          <p>Flutter Desktop renders consistently across macOS and Windows with no observed frame drops or layout instability during extended sessions — including graph-heavy screens.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="check"></div>
+        <div>
+          <h3>Smooth Graph-Heavy Dashboard</h3>
+          <p>Trend analysis charts, post-game performance curves, and hero stat grids all render without perceptible lag, even with large match history datasets loaded.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="check"></div>
+        <div>
+          <h3>Reliable Local-First Data Handling</h3>
+          <p>Hive-backed local storage enables fast reads and instant UI updates for settings, cached API responses, and session configuration — no blocking network calls on startup.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="check"></div>
+        <div>
+          <h3>End-to-End Voice Coaching Pipeline</h3>
+          <p>GSI detection, backend binary orchestration, set_player registration, and TTS delivery are all connected in a single startup flow — coaching fires reliably from first match.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="achievements">
+      <h3>Key Engineering Achievements</h3>
+      <div class="achievements-grid">
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Cross-platform GSI auto-detection spanning 3 operating systems and multiple Steam library configurations</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Encrypted backend binary distribution with runtime decryption — no plaintext executables in the bundle</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Adaptive game process monitoring with zero-impact polling strategy</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Layered architecture enabling isolated testing of services, providers, and data layers independently</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>ProxyProvider dependency chain for automatic state propagation without manual refresh calls</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Diagnostics screen with live system health signals for self-service troubleshooting</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>PASOLL coaching framework implemented as structured AI prompt and response model</p>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-bullet"></div>
+          <p>Per-Steam-ID EULA and telemetry consent tracking for multi-account environments</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-title">Mentoroid</div>
+    <div class="footer-sub">AI-Powered Dota 2 Coaching Platform · Flutter Desktop</div>
+    <div class="footer-stack">Built with Flutter Desktop · Dart · Firebase</div>
+
+  </div>
+</footer>
+
+</body>
+</html>
