@@ -778,8 +778,8 @@
   <div class="container">
     <div class="badge">Case Study</div>
     <h1 class="hero-title"><span>Mentoroid</span></h1>
-    <p class="hero-subtitle">AI-Powered Desktop Coaching &amp; Performance Dashboard for Dota 2</p>
-    <p class="hero-desc">A Flutter Desktop application that transforms complex gameplay telemetry into real-time coaching insights, analytics dashboards, and personalized performance guidance.</p>
+    <p class="hero-subtitle">How do you help a serious gamer get better when the feedback loop is broken?</p>
+    <p class="hero-desc">Mentoroid is a desktop coaching platform for competitive Dota 2 players — designed to close the gap between playing and actually improving, through real-time guidance and post-game analysis that tells you not just what happened, but what to change.</p>
 
     <div class="meta-grid">
       <div class="meta-item">
@@ -819,59 +819,54 @@
 <!-- OVERVIEW -->
 <section>
   <div class="container">
-    <div class="section-eyebrow">Overview</div>
-    <h2 class="section-title">What is Mentoroid?</h2>
+    <div class="section-eyebrow">The Problem</div>
+    <h2 class="section-title">Most Dota 2 players grind for years without actually getting better.</h2>
 
     <div class="callout">
-      <p>Mentoroid is a <strong>desktop-first coaching and analytics platform</strong> designed to help competitive Dota 2 players improve their gameplay through data-driven insights, real-time guidance, and long-term performance tracking. It runs alongside live gameplay, delivering actionable information without interrupting the game experience.</p>
+      <p>The average competitive Dota 2 player spends <strong>hundreds of hours a year</strong> in matches — yet most plateau. Not because they lack effort, but because the feedback loop is broken. A match ends. The post-game screen shows K/D/A and gold graphs. Then nothing. No direction. No coaching. No answer to the one question that actually matters: <strong>what should I do differently next game?</strong></p>
     </div>
 
-    <p class="section-lead">The platform visualizes a player's historical and live match data across multiple dimensions — roles, heroes, game phases, and performance metrics — transforming complex gameplay telemetry into clear, actionable coaching signals. The goal is not just to show statistics, but to tell players <strong>what to focus on next</strong> and why.</p>
+    <p class="section-lead">Dota 2 is one of the most complex games ever made — 120+ heroes, dynamic team roles, three distinct game phases, and hundreds of micro-decisions per match. The skill gap between a stuck player and an improving one isn't mechanical. It's informational. Better players have mental models for reading their own performance. Most players don't — and the game gives them nothing to build one with.</p>
 
-    <p style="font-size:15px; color:var(--slate-500); line-height:1.75;">By combining a responsive desktop UI with local-first data handling and an embedded backend, Mentoroid is built to remain stable across long gaming sessions while supporting real-time updates, voice coaching, and post-game analysis flows.</p>
+    <p style="font-size:15px; color:var(--slate-500); line-height:1.75;">Professional players have coaches. The other 13 million don't. Mentoroid was built to change that — a desktop companion that sits alongside live gameplay, processes real-time match telemetry, and delivers the kind of structured, personalized feedback that until now only existed in paid coaching sessions or top-tier esports organizations.</p>
   </div>
 </section>
 
 <!-- CHALLENGES -->
 <section>
   <div class="container">
-    <div class="section-eyebrow">The Challenge</div>
-    <h2 class="section-title">Why is this a hard problem?</h2>
+    <div class="section-eyebrow">Why This Is Hard</div>
+    <h2 class="section-title">Building a coaching tool for gamers means solving problems that don't exist in any other product category.</h2>
+
+    <p class="section-lead">Coaching software for knowledge workers — think Grammarly, Notion AI, or Figma — operates in a calm environment. The user is stationary. The screen is theirs. Time is available. Dota 2 is the opposite: full-screen, time-critical, and cognitively saturated. Every design and engineering decision had to be made with that context in mind.</p>
 
     <div class="challenge-list">
       <div class="challenge-item">
         <div class="challenge-num">01</div>
         <div class="challenge-body">
-          <h3>Real-Time Data in a Desktop-First Context</h3>
-          <p>Unlike web dashboards, Mentoroid must coexist with a full-screen game. The UI must remain responsive even when backgrounded, react to match events in real time, and avoid consuming resources that would degrade gaming performance.</p>
+          <h3>The tool cannot interrupt the game — but it must react to it in real time.</h3>
+          <p>A player in the middle of a match cannot read a dashboard. But coaching delivered five minutes after a mistake is useless. Mentoroid had to operate invisibly during gameplay — consuming minimal CPU and memory — while still capturing live match events and surfacing timely voice cues at the right moments. That's a fundamentally different constraint than any web-based analytics product.</p>
         </div>
       </div>
       <div class="challenge-item">
         <div class="challenge-num">02</div>
         <div class="challenge-body">
-          <h3>Cross-Platform Desktop Complexity</h3>
-          <p>Targeting macOS, Windows, and Linux simultaneously means platform-specific native code, different Steam installation paths, registry queries on Windows, sandboxed environments on macOS, and separate binary compilation targets for the embedded backend.</p>
+          <h3>Players don't want data. They want to know what to fix.</h3>
+          <p>Dota 2 already exposes match statistics. The problem isn't data availability — it's interpretation. A player staring at a KDA chart doesn't know if their laning phase is the issue, their hero pool is too narrow, or their late-game decision-making is costing wins. Mentoroid needed to synthesize hundreds of data points per match into a single, prioritized answer: here's what's actually holding you back.</p>
         </div>
       </div>
       <div class="challenge-item">
         <div class="challenge-num">03</div>
         <div class="challenge-body">
-          <h3>Embedded Backend Orchestration</h3>
-          <p>The AI coaching pipeline requires a companion backend binary to run locally. This binary must be securely distributed, encrypted at rest, decrypted and executed at runtime, and continuously monitored — all within the Flutter app lifecycle.</p>
+          <h3>The product had to work on every serious gamer's machine — without a setup wizard.</h3>
+          <p>Competitive players use macOS, Windows, and Linux. They have Steam installed in non-default directories. They run multiple monitors, custom DPI settings, and sandboxed environments. A coaching tool that requires thirty minutes of configuration to activate loses the player before the first session. The setup experience had to be automatic, invisible, and correct across all environments — or it simply wouldn't be used.</p>
         </div>
       </div>
       <div class="challenge-item">
         <div class="challenge-num">04</div>
         <div class="challenge-body">
-          <h3>Data Density Without UX Complexity</h3>
-          <p>Dota 2 produces enormous volumes of per-game telemetry. Surfacing meaningful insights — hero performance, role mastery, laning phase vs late game analysis — without overwhelming the player requires careful information hierarchy and visualization design.</p>
-        </div>
-      </div>
-      <div class="challenge-item">
-        <div class="challenge-num">05</div>
-        <div class="challenge-body">
-          <h3>GSI Integration Across Environments</h3>
-          <p>Game State Integration (GSI) requires writing a configuration file into Dota 2's install directory — which lives in wildly different locations depending on OS, Steam library configuration, and whether macOS sandboxing is active.</p>
+          <h3>AI coaching that fires at the wrong moment destroys trust immediately.</h3>
+          <p>Voice coaching during a game is high-stakes UX. If a coaching cue fires late, fires for the wrong reason, or fails silently after an update, players stop trusting the system — and a tool that isn't trusted isn't used. The entire pipeline from match event detection to voice delivery had to be deterministic, with startup orchestration ensuring every component was registered and ready before the first game began.</p>
         </div>
       </div>
     </div>
@@ -882,44 +877,34 @@
 <section>
   <div class="container">
     <div class="section-eyebrow">Technology Decision</div>
-    <h2 class="section-title">Why Flutter Desktop?</h2>
-    <p class="section-lead">Mentoroid is not a typical analytics dashboard — it is a game-adjacent, real-time desktop application that must coexist with a full-screen game. The framework decision was consequential and non-obvious.</p>
+    <h2 class="section-title">Why Flutter Desktop — and what we gave up to choose it.</h2>
+    <p class="section-lead">The framework decision was made early and shaped everything that followed. Three serious options were on the table: Electron, native platform toolkits (SwiftUI + WinUI + GTK), and Flutter Desktop. Each had real tradeoffs — and the choice wasn't obvious.</p>
 
     <div class="flutter-grid">
       <div class="flutter-card">
-        <div class="flutter-icon">⚡</div>
-        <h3>GPU-Accelerated Rendering</h3>
-        <p>Flutter's Skia/Impeller renderer delivers smooth, consistent frame rates even for graph-heavy dashboards, without relying on a browser engine or heavyweight web stack.</p>
+        <div class="flutter-icon">❌</div>
+        <h3>Why not Electron?</h3>
+        <p>Electron was the fastest path to a cross-platform desktop app. We ruled it out for one reason: resource consumption. Electron ships a full Chromium instance. On a gaming PC where every CPU and GPU cycle competes with the game, a 300MB+ memory overhead from a companion app is a non-starter. Players would disable it before the first session.</p>
       </div>
       <div class="flutter-card">
-        <div class="flutter-icon">🎯</div>
-        <h3>Single Codebase, Three Platforms</h3>
-        <p>macOS, Windows, and Linux are all served from the same Dart codebase. Platform-specific logic is isolated to native channels, keeping the product surface consistent.</p>
+        <div class="flutter-icon">❌</div>
+        <h3>Why not native per-platform?</h3>
+        <p>SwiftUI on macOS, WinUI on Windows, and GTK on Linux would have delivered the best possible performance per platform. But it meant three separate codebases, three UI implementations, and tripled QA surface — for a small team shipping a product that wasn't yet revenue-generating. The maintenance cost would have killed the iteration speed we needed.</p>
       </div>
       <div class="flutter-card">
-        <div class="flutter-icon">📐</div>
-        <h3>Pixel-Perfect Dashboard Layouts</h3>
-        <p>flutter_screenutil enables a reference-based layout system (1440×900) that scales cleanly across display sizes and DPI settings — critical for data-dense game companion UIs.</p>
+        <div class="flutter-icon">✓</div>
+        <h3>Why Flutter Desktop?</h3>
+        <p>Flutter's Skia/Impeller renderer runs GPU-accelerated without a browser engine, keeping the memory footprint low enough to coexist with a running game. A single Dart codebase served all three platforms, with platform-specific logic isolated to native channels. The Dart VM's long-running process behavior — unlike a browser's GC model — made it predictable across 2–3 hour gaming sessions.</p>
       </div>
       <div class="flutter-card">
-        <div class="flutter-icon">🔁</div>
-        <h3>Future-Proof Architecture</h3>
-        <p>The same UI architecture, components, and state management patterns can be reused if Mentoroid expands to mobile or web surfaces in the future, reducing rework cost.</p>
-      </div>
-      <div class="flutter-card">
-        <div class="flutter-icon">🧩</div>
-        <h3>Rich Ecosystem</h3>
-        <p>Mature packages for charting (fl_chart), routing (go_router), local storage (Hive), and window management gave the team building blocks without reinventing infrastructure.</p>
-      </div>
-      <div class="flutter-card">
-        <div class="flutter-icon">🕐</div>
-        <h3>Predictable Long-Session Behavior</h3>
-        <p>Flutter's Dart VM is suited for long-running desktop processes, making it reliable during 2–3 hour gaming sessions without GC-induced latency spikes.</p>
+        <div class="flutter-icon">⚠️</div>
+        <h3>What we gave up.</h3>
+        <p>Flutter Desktop is not a mature target. Desktop-specific packages are thinner than mobile equivalents. Window management, system tray integration, and native menu bars required workarounds. Some platform behaviors — particularly macOS sandboxing interactions with Steam paths — had no documented solutions and required original investigation. We accepted this tradeoff because the rendering and codebase unification benefits outweighed the rough edges.</p>
       </div>
     </div>
 
     <div class="quote-block">
-      <p>Flutter Desktop allowed us to build a high-performance, data-dense UI that behaves like a native desktop app — without splitting into three separate codebases or compromising on visual quality.</p>
+      <p>The right framework decision isn't the one with the most features — it's the one whose tradeoffs you can live with given your specific constraints. For a small team building a game-adjacent desktop tool across three platforms, Flutter's unification benefits were worth its immaturity.</p>
     </div>
   </div>
 </section>
@@ -1148,94 +1133,67 @@
 <!-- OUTCOMES -->
 <section>
   <div class="container">
-    <div class="section-eyebrow">Outcomes</div>
-    <h2 class="section-title">Results &amp; Current State</h2>
-    <p class="section-lead">Mentoroid is currently under active development and not yet in public production. At this stage, the following qualitative outcomes have been validated:</p>
-
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="stat-number">3</div>
-        <div class="stat-label">Desktop Platforms Supported</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">8+</div>
-        <div class="stat-label">Major Feature Screens</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">1</div>
-        <div class="stat-label">Shared Dart Codebase</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" style="font-size:26px;">AES<br>256</div>
-        <div class="stat-label">Binary Encryption</div>
-      </div>
-    </div>
+    <div class="section-eyebrow">Where We Are</div>
+    <h2 class="section-title">What's been validated — and what's still a hypothesis.</h2>
+    <p class="section-lead">Mentoroid is in active development and has not yet launched publicly. Being honest about that distinction matters: there are things we know, things we've validated internally, and things that remain open questions until real players use it at scale.</p>
 
     <div class="outcome-grid">
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>Stable Desktop UI Behavior</h3>
-          <p>Flutter Desktop renders consistently across macOS and Windows with no observed frame drops or layout instability during extended sessions — including graph-heavy screens.</p>
+          <h3>The full pipeline works end-to-end.</h3>
+          <p>From Steam installation detection, GSI config injection, and live match event capture — through AI summary generation and voice coaching delivery — the entire system connects and fires correctly. This was non-trivial: six independent subsystems had to coordinate on startup with no race conditions. That's validated.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>Smooth Graph-Heavy Dashboard</h3>
-          <p>Trend analysis charts, post-game performance curves, and hero stat grids all render without perceptible lag, even with large match history datasets loaded.</p>
+          <h3>The app is stable enough to run alongside a live game.</h3>
+          <p>Extended internal sessions across macOS and Windows showed no frame drops on game performance, no memory leaks over 2–3 hour sessions, and no UI instability on graph-heavy screens. The resource coexistence constraint — the hardest non-negotiable from the start — has been met.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>Reliable Local-First Data Handling</h3>
-          <p>Hive-backed local storage enables fast reads and instant UI updates for settings, cached API responses, and session configuration — no blocking network calls on startup.</p>
+          <h3>The setup experience is frictionless on all three platforms.</h3>
+          <p>GSI auto-detection works across default and non-default Steam library paths on macOS, Windows, and Linux — including sandboxed macOS environments. Players don't touch a config file. That was a deliberate product decision: a coaching tool that requires manual setup will be abandoned before the first session.</p>
         </div>
       </div>
       <div class="outcome-card">
-        <div class="check"></div>
+        <div class="check" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
         <div>
-          <h3>End-to-End Voice Coaching Pipeline</h3>
-          <p>GSI detection, backend binary orchestration, set_player registration, and TTS delivery are all connected in a single startup flow — coaching fires reliably from first match.</p>
+          <h3>Whether coaching changes player behavior is still an open question.</h3>
+          <p>The core product hypothesis — that structured AI-generated coaching translates into measurable skill improvement for Dota 2 players — has not yet been tested at scale. We have designed around it carefully: the PASOLL framework, goal tracking, and session-over-session trend analysis all exist to make that measurement possible. Validating it requires real users playing real games over time. That work is ahead of us.</p>
         </div>
       </div>
     </div>
 
     <div class="achievements">
-      <h3>Key Engineering Achievements</h3>
+      <h3>Key Engineering Decisions Made</h3>
       <div class="achievements-grid">
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>Cross-platform GSI auto-detection spanning 3 operating systems and multiple Steam library configurations</p>
+          <p>Chose Flutter Desktop over Electron specifically to eliminate the resource overhead of a bundled browser engine on gaming hardware</p>
         </div>
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>Encrypted backend binary distribution with runtime decryption — no plaintext executables in the bundle</p>
+          <p>Encrypted backend binary distribution — no plaintext executables in the app bundle, decrypted only at runtime in the application support directory</p>
         </div>
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>Adaptive game process monitoring with zero-impact polling strategy</p>
+          <p>Adaptive polling strategy (3s → 10s on game detection) keeps the monitoring footprint near zero during active gameplay</p>
         </div>
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>Layered architecture enabling isolated testing of services, providers, and data layers independently</p>
+          <p>Startup orchestration with <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">_ensureGsiConfigured()</code> eliminated the race condition between app launch and game start that was causing silent coaching sessions</p>
         </div>
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>ProxyProvider dependency chain for automatic state propagation without manual refresh calls</p>
+          <p>Layered information architecture — aggregate score on the dashboard, breakdowns on demand, post-game detail on a separate flow — to avoid overwhelming players who just want one answer</p>
         </div>
         <div class="achievement-item">
           <div class="ach-bullet"></div>
-          <p>Diagnostics screen with live system health signals for self-service troubleshooting</p>
-        </div>
-        <div class="achievement-item">
-          <div class="ach-bullet"></div>
-          <p>PASOLL coaching framework implemented as structured AI prompt and response model</p>
-        </div>
-        <div class="achievement-item">
-          <div class="ach-bullet"></div>
-          <p>Per-Steam-ID EULA and telemetry consent tracking for multi-account environments</p>
+          <p>PostHog and Firebase Analytics instrumented from day one to measure feature adoption and session patterns before public launch</p>
         </div>
       </div>
     </div>
@@ -1248,6 +1206,7 @@
     <div class="footer-title">Mentoroid</div>
     <div class="footer-sub">AI-Powered Dota 2 Coaching Platform · Flutter Desktop</div>
     <div class="footer-stack">Built with Flutter Desktop · Dart · Firebase</div>
+    <div class="footer-date">© 2025 Mentoroid. All rights reserved.</div>
 
   </div>
 </footer>
