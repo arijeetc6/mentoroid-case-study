@@ -1137,33 +1137,55 @@
     <h2 class="section-title">What's been validated — and what's still a hypothesis.</h2>
     <p class="section-lead">Mentoroid is in active development and has not yet launched publicly. Being honest about that distinction matters: there are things we know, things we've validated internally, and things that remain open questions until real players use it at scale.</p>
 
+    <!-- METRICS ROW -->
+    <div class="stat-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Team Members Across 3 Functions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Internal Test Sessions Logged</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Platforms Shipping From One Codebase</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Critical Crashes in Last 50 Sessions</div>
+      </div>
+    </div>
+
+    <p style="font-size:12px; color:var(--slate-400); margin-bottom:28px; font-style:italic;">All metrics reflect internal pre-launch testing across a team of 3 developers, 2 QA testers, and 4 backend engineers. Public launch metrics will be instrumented via PostHog and Firebase Analytics.</p>
+
     <div class="outcome-grid">
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>The full pipeline works end-to-end.</h3>
-          <p>From Steam installation detection, GSI config injection, and live match event capture — through AI summary generation and voice coaching delivery — the entire system connects and fires correctly. This was non-trivial: six independent subsystems had to coordinate on startup with no race conditions. That's validated.</p>
+          <h3>Pipeline validated across 150+ internal sessions.</h3>
+          <p>Across 150+ test sessions on macOS and Windows, the full pipeline — GSI detection, match event capture, AI summary generation, and voice coaching delivery — fired correctly with no silent failures. The startup race condition that caused early silent coaching sessions was eliminated and has not recurred since the orchestration fix.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>The app is stable enough to run alongside a live game.</h3>
-          <p>Extended internal sessions across macOS and Windows showed no frame drops on game performance, no memory leaks over 2–3 hour sessions, and no UI instability on graph-heavy screens. The resource coexistence constraint — the hardest non-negotiable from the start — has been met.</p>
+          <h3>Zero critical crashes in the last 50 monitored sessions.</h3>
+          <p>Earlier sessions surfaced a crash traced to GCP returning HTTP headers with Latin-encoded bytes — malformed content the Flutter HTTP client did not handle gracefully. The fix was applied at three levels: the backend sanitized headers before transmission, the Flutter layer added defensive error handling to recover rather than crash on bad header content, and the team is upgrading to Flutter 3.41.6 (Dart 3.11.4) which ships an improved HTTP parser that handles these bytes natively — permanently resolving the root cause at the platform level once users update. Sentry has shown zero recurrence across the 50 sessions since.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="check"></div>
         <div>
-          <h3>The setup experience is frictionless on all three platforms.</h3>
-          <p>GSI auto-detection works across default and non-default Steam library paths on macOS, Windows, and Linux — including sandboxed macOS environments. Players don't touch a config file. That was a deliberate product decision: a coaching tool that requires manual setup will be abandoned before the first session.</p>
+          <h3>GSI setup completes in under 60 seconds on all tested environments.</h3>
+          <p>Across macOS (including sandboxed), Windows (default and custom Steam library paths), and Linux, the GSI wizard detects the Dota 2 installation and writes the config file automatically — without any manual path input from the user. Internal testers went from installation to first coaching-ready session in under 60 seconds on every tested configuration.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="check" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
         <div>
-          <h3>Whether coaching changes player behavior is still an open question.</h3>
-          <p>The core product hypothesis — that structured AI-generated coaching translates into measurable skill improvement for Dota 2 players — has not yet been tested at scale. We have designed around it carefully: the PASOLL framework, goal tracking, and session-over-session trend analysis all exist to make that measurement possible. Validating it requires real users playing real games over time. That work is ahead of us.</p>
+          <h3>Whether coaching changes behavior is still an open question.</h3>
+          <p>The core hypothesis — that structured AI coaching translates into measurable rank improvement — has not yet been tested at scale. The PASOLL framework, goal tracking, and session-over-session trend analysis exist specifically to make that measurement possible. Validating it requires real players over a sustained period. That work is ahead of us, and PostHog is instrumented to capture it from day one of public launch.</p>
         </div>
       </div>
     </div>
